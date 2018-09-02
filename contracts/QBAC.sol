@@ -27,7 +27,7 @@ contract QBAC {
   }
 
   function preapprove(address _tempAddress) public
-  //onlyAdmin
+  onlyAdmin
   {
     approved[_tempAddress] = true;
     _tempAddress.transfer(TEMP_USER_ETHER_ALLOCATION);
