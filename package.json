@@ -3,14 +3,14 @@
   "version": "0.0.1",
   "description": "Solidity contract to add people to a bitmask RBAC",
   "dependencies": {
-    "openzeppelin-solidity": "1.10.0"
+    "openzeppelin-solidity": "1.12.0"
   },
   "files": [
     "contracts",
     "test"
   ],
   "scripts": {
-    "test": "scripts/test.sh",
+    "test": "truffle test --network test",
     "lint": "eslint .",
     "lint:sol": "solium -d ./contracts",
     "preapprove": "./scripts/generateKey.js"
