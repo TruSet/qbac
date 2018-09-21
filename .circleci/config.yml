@@ -18,7 +18,7 @@ jobs:
   test:
     docker:
       - image: circleci/node:10.0
-      - image: gtaschuk/testrpc
+      - image: trufflesuite/ganache-cli:latest
     working_directory: ~/repo
     steps:
       - checkout
