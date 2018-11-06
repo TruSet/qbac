@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Solidity contract to add people to a bitmask RBAC",
   "dependencies": {
-    "openzeppelin-solidity": "1.12.0"
+    "bitmask-rbac": "^1.0.0",
+    "openzeppelin-solidity": "1.10.0"
   },
   "files": [
     "contracts",
