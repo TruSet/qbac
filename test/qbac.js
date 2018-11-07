@@ -13,13 +13,15 @@ contract('QBAC', function ([admin, addressToWhitelist]) {
 
   before(async function () {
     rbac = await TestRBAC.new()
-
-    await rbac.makeAdmin(admin)
+    await rbac.addUserRole('qbac_admin')
+    await rbac.addUserRole('user')
+    await rbac.setUserRoles(admin, 2 | 1)
     assert(await rbac.hasRole(admin, 'qbac_admin'))
 
     token = await TestToken.new()
 
     qbac = await TestQBAC.new(rbac.address, token.address)
+    await rbac.newUser(qbac.address, "QBAC", 1)
     // allow qbac to send tokens on the owner's behalf
     await token.approve(qbac.address, 100000*1000)
 
@@ -91,7 +93,6 @@ contract('QBAC', function ([admin, addressToWhitelist]) {
           //gasLimit: 1000000,
           gas: web3.utils.toWei('.001', 'gwei'),
         })
-        //await qbac.whitelist(accounts[1], {from: tempAddress})
       })
 
 
