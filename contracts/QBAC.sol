@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity 0.5.10;
 import "./AbstractRBAC.sol";
 
 contract QBAC {
@@ -12,9 +12,11 @@ contract QBAC {
 
   mapping(address => bool) public approved; // default false
 
-  //constructor(address _rbac) public {
-    //rbac = AbstractRBAC(_rbac);
-  //}
+  // TODO: without setting an RBAC, this contract is unsafe to use because anyone can transfer out all of the ETH using preapprove()
+  //       should set one here and pass through in subclasses
+  // constructor(address _rbac) public {
+  //   rbac = AbstractRBAC(_rbac);
+  // }
 
   modifier onlyAdmin() {
     rbac.checkRole(msg.sender, ROLE_ADMIN);
@@ -26,7 +28,7 @@ contract QBAC {
     _;
   }
 
-  function preapprove(address _tempAddress) public
+  function preapprove(address payable _tempAddress) public
   onlyAdmin
   {
     approved[_tempAddress] = true;
@@ -44,7 +46,7 @@ contract QBAC {
 
   }
   // fallback function so that contract can recieve ether
-  function() payable public { }
+  function() payable external { }
 
   // You should create a method like this one
   // that does a function  more specific to your application

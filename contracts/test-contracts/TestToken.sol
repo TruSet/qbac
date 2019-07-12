@@ -1,8 +1,8 @@
 // adapted from openzeppelin-solidity/contracts/examples/SimpleToken.sol
-pragma solidity ^0.4.24;
-import "openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol";
+pragma solidity 0.5.10;
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 
-contract TestToken is StandardToken {
+contract TestToken is ERC20 {
 
   string public constant name = "TestToken";
   string public constant symbol = "TST";
@@ -11,9 +11,7 @@ contract TestToken is StandardToken {
   uint256 public constant INITIAL_SUPPLY = 100000 * (10 ** uint256(decimals));
 
   constructor() public {
-    totalSupply_ = INITIAL_SUPPLY;
-    balances[msg.sender] = INITIAL_SUPPLY;
-    emit Transfer(address(0), msg.sender, INITIAL_SUPPLY);
+    _mint(msg.sender, INITIAL_SUPPLY);
   }
 
 }
