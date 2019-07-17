@@ -13,8 +13,7 @@ contract TestQBAC is QBAC, Ownable {
   uint public constant NEW_USER_TOKEN_ALLOCATION = 50;
   uint public constant DEFAULT_ROLE = 5;
 
-  constructor(address _rbac, address _token) public {
-    rbac = AbstractRBAC(_rbac);
+  constructor(address _rbac, address _token) QBAC(_rbac) public {
     token = AbstractTestToken(_token);
   }
   
