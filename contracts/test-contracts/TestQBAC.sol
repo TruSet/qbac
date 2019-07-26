@@ -1,7 +1,6 @@
-pragma solidity ^0.4.24;
+pragma solidity 0.5.10;
 import "../QBAC.sol";
 import "./AbstractTestToken.sol";
-import "openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol";
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "../AbstractRBAC.sol";
 
@@ -14,12 +13,11 @@ contract TestQBAC is QBAC, Ownable {
   uint public constant NEW_USER_TOKEN_ALLOCATION = 50;
   uint public constant DEFAULT_ROLE = 5;
 
-  constructor(address _rbac, address _token) public {
-    rbac = AbstractRBAC(_rbac);
+  constructor(address _rbac, address _token) QBAC(_rbac) public {
     token = AbstractTestToken(_token);
   }
   
-  function whitelist(address _newAddress) public
+  function whitelist(address payable _newAddress) public
   approvedToJoin
   {
     // give user ether
@@ -27,7 +25,7 @@ contract TestQBAC is QBAC, Ownable {
     // add them as a user to the rbac
     rbac.newUser(_newAddress, "no name", DEFAULT_ROLE);
     // give them tokens to play with
-    token.transferFrom(owner, _newAddress, NEW_USER_TOKEN_ALLOCATION);
+    token.transferFrom(owner(), _newAddress, NEW_USER_TOKEN_ALLOCATION);
 
     // they are only approved to call this method once
     approved[msg.sender] = false;

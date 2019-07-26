@@ -1,4 +1,13 @@
+let compilers = {
+  solc: {
+    version: '0.5.10',
+    docker: false,
+  },
+}
+
 module.exports = {
+  plugins: ['truffle-security'],
+  compilers,
   networks: {
     development: {
       host: 'localhost',
@@ -7,8 +16,13 @@ module.exports = {
     },
     ganache: {
       host: 'localhost',
-      port: 9545,
+      port: 7545,
       network_id: '*', // eslint-disable-line camelcase
+    },
+    test: {
+      host: 'localhost',
+      port: 8545,
+      network_id: '*', // Match any network id
     },
   },
 }
