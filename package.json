@@ -27,7 +27,7 @@
     "zeppelin"
   ],
   "author": "Greg Taschuk",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/gtaschuk/bitmask-rbac/issues"
   },
